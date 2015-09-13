@@ -4,12 +4,21 @@
 
 require 'gosu'
 include Gosu
+## The following is only needed to automatically get the screen size
+#  - START -
+require 'Qt4'
 
-$dimension_x = 1440
-$dimension_y = 900
+app = Qt::Application.new(ARGV)
+desktop = Qt::DesktopWidget.new
+desktop.availableGeometry(desktop.primaryScreen())
+
+$dimension_x = desktop.geometry().width()
+$dimension_y = desktop.geometry().height()
+#  - END -
+
 $line_limit = 70
 
-class AppWindow < Window
+class GameWindow < Window
 
   def initialize
     super $dimension_x, $dimension_y, true
@@ -47,6 +56,7 @@ class AppWindow < Window
 		  puts "end"
           puts @upperleft
 		  puts @lowerright
+		  
 		  exit
 		elsif self.button_down?(Gosu::KbEscape)
 		  @step = "before"
@@ -71,4 +81,4 @@ class AppWindow < Window
   end
 end
 
-AppWindow.new.show
+GameWindow.new.show
