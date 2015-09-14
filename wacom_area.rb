@@ -56,7 +56,8 @@ class GameWindow < Window
 		  puts "end"
           puts @upperleft
 		  puts @lowerright
-		  
+		  #exec 'xsetwacom --set "Wacom USB Bamboo PAD Pen stylus" Button 2 "key ctrl z"'
+                  exec "xsetwacom --set \"Wacom USB Bamboo PAD Pen stylus\" Area #{@upperleft[0]} #{@upperleft[1]} #{@lowerright[0]} #{@lowerright[1]}" 
 		  exit
 		elsif self.button_down?(Gosu::KbEscape)
 		  @step = "before"
